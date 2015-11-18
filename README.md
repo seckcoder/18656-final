@@ -34,6 +34,7 @@ requirement:
 - Run server
 
   cd mysite
+
   python manage.py runserver
 
   check http://127.0.0.1:8000/
