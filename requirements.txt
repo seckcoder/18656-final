@@ -1,0 +1,9 @@
+decorator==4.0.4
+Django==1.4.22
+lucene-querybuilder==0.2
+neo4django==0.1.8
+neo4jrestclient==2.1.0
+python-dateutil==2.4.2
+requests==2.8.1
+six==1.10.0
+wheel==0.24.0
