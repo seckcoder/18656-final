@@ -1,4 +1,7 @@
 
+import os
+os.environ['NEO4J_REST_URL'] = 'http://neo4j:admin@localhost:7474/db/data/'
+
 from data_2015_fall.models import *
 
 
@@ -33,3 +36,5 @@ def findCoAuthors():
             coauthors.add(coauthor.name)
 
     print coauthors
+
+findCoAuthors()

@@ -5,6 +5,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 BASE_DIR = "./"
 
+os.environ['NEO4J_REST_URL'] = 'http://neo4j:admin@localhost:7474/db/data/'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
