@@ -25,5 +25,15 @@ requirement:
 
   pip install -r requirements.txt
 
+# Run Django Web App
 
+- Activate env
 
+  source env/bin/activate
+
+- Run server
+
+  cd mysite
+  python manage.py runserver
+
+  check http://127.0.0.1:8000/
