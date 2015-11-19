@@ -20,4 +20,5 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', hello_world),
+    url(r'^dblp/', include('data_2015_fall.urls'))
 )

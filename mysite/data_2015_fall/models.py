@@ -15,9 +15,12 @@ class Author(StructuredNode):
     name = StringProperty()
     articles = RelationshipTo('Article', 'AUTHORED')
     def __str__(self):
-        return "<Author: " + self.name + ">"
+        # Call str function here since sometimes the object might not
+        # found in the database...
+        # Python sucks
+        return "<Author: " + str(self.name) + ">"
     def __repr__(self):
-        return "<Author: " + self.name + ">"
+        return "<Author: " + repl(self.name) + ">"
 
     def __hash__(self):
         """
@@ -26,3 +29,8 @@ class Author(StructuredNode):
         return hash(self.name)
     def __cmp__(self, other):
         return cmp(self.name, other.name)
+
+    def toDict(self):
+        return {
+            "name": self.name
+        }
