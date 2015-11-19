@@ -13,8 +13,8 @@ def mockData():
     )
 
     pubs = Article.create(
-    {'title':'pub1', 'journal':'IEEE XXX', 'year' : 2015},
-    {'title':'pub2', 'journal':'IEEE XXX', 'year' : 2015},
+    {'title':'pub1', 'journal':'IEEE XXX', 'year' : 2015, 'volumn': 10},
+    {'title':'pub2', 'journal':'IEEE XXX', 'year' : 2015, 'volumn':15},
     )
     for user in users:
         user.save()
