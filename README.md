@@ -34,6 +34,8 @@ requirement:
 
   mvn clean && mvn compile
 
+- Move dblp.xml file to 18656-final/
+
 - Run DBLP parser
 
 - Set Neo4j password to 123456
