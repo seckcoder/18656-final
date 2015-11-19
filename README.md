@@ -38,9 +38,11 @@ requirement:
 
 - Run DBLP parser
 
-- Set Neo4j password to 123456
+- Neo4j configuration
 
-  http://localhost:7474/
+  Set database location to 18656-final/target/neo4j-dblp/
+
+  Start neo4j and set password to "123456" at http://127.0.0.1:7474/
 
 # Run Django Web App
 
