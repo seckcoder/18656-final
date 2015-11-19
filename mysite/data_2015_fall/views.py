@@ -1,7 +1,7 @@
 # Create your views here.
 from datetime import datetime
 from django.shortcuts import render
-from django.utils import simplejson
+import simplejson
 from django.utils.safestring import SafeString
 
 input_json = {

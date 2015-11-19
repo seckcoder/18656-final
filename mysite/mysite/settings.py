@@ -1,5 +1,6 @@
 # Django settings for mysite project.
 import os
+os.environ.setdefault("NEO4J_REST_URL", 'http://neo4j:admin@localhost:7474/db/data')
 PROJECT_DIR = os.path.dirname(__file__)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
