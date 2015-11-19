@@ -39,6 +39,8 @@ requirement:
 - Download dblp.xml file and extract to dblp-loader/ at http://dblp.uni-trier.de/xml/
 
 - Run DBLP parser
+  
+  mvn exec:java -Dexec.mainClass="edu.cmu.sv.neo4j.Parser"
 
 - Neo4j configuration
 
