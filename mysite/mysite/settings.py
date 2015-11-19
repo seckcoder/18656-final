@@ -5,8 +5,6 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 BASE_DIR = "./"
 
-os.environ['NEO4J_REST_URL'] = 'http://neo4j:admin@localhost:7474/db/data/'
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -24,14 +22,6 @@ DATABASES = {
     }
 }
 
-
-NEO4J_DATABASES = {
-    'default': {
-        'HOST': 'localhost',
-        'PORT':7474,
-        'ENDPOINT':'/db/data'
-    }
-}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts

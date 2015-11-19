@@ -7,6 +7,7 @@ class Article(StructuredNode):
     title = StringProperty()
     journal = StringProperty()
     year = IntegerProperty()
+    volume = IntegerProperty()
     authors = RelationshipFrom('Author', 'AUTHORED')
 
 
@@ -25,4 +26,3 @@ class Author(StructuredNode):
         return hash(self.name)
     def __cmp__(self, other):
         return cmp(self.name, other.name)
-        
