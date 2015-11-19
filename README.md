@@ -25,6 +25,21 @@ requirement:
 
   pip install -r requirements.txt
 
+# Load DBLP into Neo4j
+
+requirement:
+  maven
+
+- Clean and Compile
+
+  mvn clean && mvn compile
+
+- Run DBLP parser
+
+- Set Neo4j password to 123456
+
+  http://localhost:7474/
+
 # Run Django Web App
 
 - Activate env
