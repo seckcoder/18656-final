@@ -1,4 +1,5 @@
 # Create your views here.
+import urllib2
 from datetime import datetime
 from django.shortcuts import render
 import simplejson
@@ -390,10 +391,24 @@ input_json = {
 data = simplejson.dumps(input_json)
 
 def hello_world(request):
+    try:
+      a = request.GET['input'].replace(" ", "%20")
+      h = request.GET['search_param']
+      req = urllib2.Request('http://127.0.0.1:8000/dblp/coauthors/' + h +'/'+a)
+      f = urllib2.urlopen(req)
+      out = f.read()
+    except:
+      a = "a"
+      h = "1"
+      out = "lll"
     return render(request,
     	'index.html',
     	{'input_json':SafeString(data),
+      'a':a,
+      'h':h,
+      'out':SafeString(out)
       })
+
 
 def demo_wei(request):
     print "here"

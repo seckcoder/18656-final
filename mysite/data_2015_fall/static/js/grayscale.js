@@ -176,3 +176,12 @@ function init() {
         icon: image
     });
 }
+
+$(document).ready(function(e){
+    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+        e.preventDefault();
+        var param = $(this).attr("href").replace("#","");
+        $('#search_concept').text(param);
+        $('.input-group #search_param').val(param);
+    });
+});
