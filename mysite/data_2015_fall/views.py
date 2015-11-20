@@ -1,5 +1,4 @@
 # Create your views here.
-import urllib2
 from datetime import datetime
 from django.shortcuts import render
 import simplejson
@@ -391,24 +390,10 @@ input_json = {
 data = simplejson.dumps(input_json)
 
 def hello_world(request):
-    try:
-      a = request.GET['input'].replace(" ", "%20")
-      h = request.GET['search_param']
-      req = urllib2.Request('http://127.0.0.1:8000/dblp/coauthors/' + h +'/'+a)
-      f = urllib2.urlopen(req)
-      out = f.read()
-    except:
-      a = "a"
-      h = "1"
-      out = "lll"
     return render(request,
     	'index.html',
     	{'input_json':SafeString(data),
-      'a':a,
-      'h':h,
-      'out':SafeString(out)
       })
-
 
 def demo_wei(request):
     print "here"
@@ -434,49 +419,52 @@ class CoAuthorNode(object):
     def toDict(self):
         return {
             "name": self.name,
-            "children": [c.toDict for c in self.children]
+            "children": [c.toDict() for c in self.children]
         }
 
 
 def findCoAuthors(request, name):
     try:
-        root = findCoAuthorsMultiLevel_(0, 1, name)
+        root = findCoAuthorsMultiLevel_(1, name)
     except DoesNotExist as e:
         return JsonResponse({'error': "Can't find Author: " + name})
     return JsonResponse({'coauthors': simplejson.dumps(root.toDict)})
 
-def findCoAuthors_(name):
+def findCoAuthors_(name, visited):
     author = Author.nodes.get(name=name)
     coauthors = set()
     for article in author.articles.all():
         for coauthor in article.authors.all():
-            coauthors.add(coauthor.name)
+            if coauthor.name not in visited and coauthor.name != name:
+                coauthors.add(coauthor.name)
     return coauthors
 
-def dfs(level, depth, u, visited):
-    uNode = CoAuthorNode(u, [])
-    visited[u] = uNode
-    if level >= depth: return uNode
-
-    for v in findCoAuthors_(u):
-        if not v in coauthors:
-            vNode = dfs(level+1, depth, v, visited)
-            uNode.children.append(vNode)
-    return uNode
-
 def findCoAuthorsMultiLevel_(depth, name):
-    author = Author.nodes.get(name=name)
+    root = Author.nodes.get(name=name)
+    root = CoAuthorNode(root.name, [])
 
-    visited = set()
-    queue = Queue()
+    visited = set([root.name])
+    root.children = [CoAuthorNode(v, []) for v in findCoAuthors_(root.name, visited)]
 
+    if depth == 1: return root
 
-
-
+    # special requirement here.
+    # 1. We can't link back to the root
+    # 2. For case:
+    #       v1 -> v2 -> v3
+    #       v1 -> v4 -> v3
+    #   We need to add v3 as children for both v2 and v4
+    # As a result, instead of dfs/bfs, I directly implement this using Simulation Algorithm.
+    for u in root.children:
+        u.children = [CoAuthorNode(v, []) for v in findCoAuthors_(u.name, visited)]
+    return root
 
 def findCoAuthorsMultiLevel(request, level, name):
+    """
+    Currently only support <= 2 levels.
+    """
     try:
-        coauthors = findCoAuthorsMultiLevel_(level, name)
+        root = findCoAuthorsMultiLevel_(level, name)
     except DoesNotExist as e:
         return JsonResponse({'error': "Can't find Author: " + name})
-    return JsonResponse({'coauthors': simplejson.dumps([author.toDict() for author in coauthors])})
+    return JsonResponse({'coauthors': simplejson.dumps(root.toDict())})
