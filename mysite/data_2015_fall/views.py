@@ -428,7 +428,7 @@ def findCoAuthors(request, name):
         root = findCoAuthorsMultiLevel_(1, name)
     except DoesNotExist as e:
         return JsonResponse({'error': "Can't find Author: " + name})
-    return JsonResponse({'coauthors': simplejson.dumps(root.toDict)})
+    return JsonResponse({'coauthors': simplejson.dumps(root.toDict())})
 
 def findCoAuthors_(name, visited):
     author = Author.nodes.get(name=name)
