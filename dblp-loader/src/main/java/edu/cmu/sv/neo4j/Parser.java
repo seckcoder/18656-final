@@ -29,7 +29,7 @@ public class Parser {
     class SAXHandler extends DefaultHandler {
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes) {
-			if (numRecords <= 999) {
+			if (numRecords <= 9999) {
 				switch (qName) {
 				case "paper":
 				case "inproceedings":

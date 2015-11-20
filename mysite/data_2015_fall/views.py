@@ -13,14 +13,20 @@ def landing(request):
     h = ""
     out = ""
     target = 'index.html'
+    query = "Search term..."
     try:
       a = request.GET['input'].replace(" ", "%20")
       h = request.GET['search_param']
-      url = 'http://127.0.0.1:8000/dblp/coauthors/' + h +'/'+a
-      req = urllib2.Request(url)
-      f = urllib2.urlopen(req)
-      out = f.read()
-      out = out[out.find("{",1):-2].replace("\\", "")
+      if a and h :
+        if h == "2":
+          url = 'http://127.0.0.1:8000/dblp/coauthors/' + h +'/'+a
+        else:
+          url = 'http://127.0.0.1:8000/dblp/coauthors/' + a
+        req = urllib2.Request(url)
+        f = urllib2.urlopen(req)
+        out = f.read()
+        out = out[out.find("{",1):-2].replace("\\", "")
+        query = request.GET['input']
     except:
       pass
 
@@ -30,6 +36,7 @@ def landing(request):
     return render(request,
     target,
     {'out':SafeString(out),
+    'query': query,
     })
 
 def demo_wei(request):

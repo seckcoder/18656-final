@@ -68,7 +68,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <p class="intro-text">DBLP search tool </p>
+                        <p class="intro-text">DBLP search tool {{query}} </p>
 
                         <form action="" method="get" role="form" class="form-horizontal">
                             <div class="input-group">
@@ -81,8 +81,9 @@
                                   <li><a href="#2">2</a></li>
                                 </ul>
                             </div>
-                            <input type="hidden" name="search_param" value="1" id="search_param">         
+                            <input type="hidden" name="search_param" value="1" id="search_param">
                             <input type="text" class="form-control" name="input" placeholder="Search term...">
+
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                             </span>
@@ -125,6 +126,12 @@
     <!-- Custom Theme JavaScript -->
     <script src="{{STATIC_URL}}js/grayscale.js"></script>
 
+    <!-- Update search bar -->
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $(".form-control").val("{{query}}");
+    });
+    </script>
 </body>
 
 </html>
