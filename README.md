@@ -32,17 +32,19 @@ requirement:
 
 - Clean and Compile
 
-  cd xml-loader
+  cd dblp-loader
 
   mvn clean && mvn compile
 
-- Download dblp.xml file and extract to xml-loader/ at http://dblp.uni-trier.de/xml/
+- Download dblp.xml file and extract to dblp-loader/ at http://dblp.uni-trier.de/xml/
 
 - Run DBLP parser
+  
+  mvn exec:java -Dexec.mainClass="edu.cmu.sv.neo4j.Parser"
 
 - Neo4j configuration
 
-  Set database location to xml-loader/target/neo4j-dblp/
+  Set database location to dblp-loader/target/neo4j-dblp/
 
   Start neo4j and set password to "123456" at http://127.0.0.1:7474/
 
