@@ -2,8 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 # import view functions from trips app
-from data_2015_fall.views import hello_world
-from data_2015_fall.views import input_json
+from data_2015_fall.views import landing
 
 
 # Uncomment the next two lines to enable the admin:
@@ -19,6 +18,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', hello_world),
+    url(r'^$', landing),
     url(r'^dblp/', include('data_2015_fall.urls'))
 )

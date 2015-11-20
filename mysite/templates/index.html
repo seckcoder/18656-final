@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %} test {% endblock %}
+{% block json %} {{out}} {% endblock %}
 
-{% block test %}
+{% block result %}
 
 <style>
 
@@ -26,18 +26,24 @@
 <script src="{{STATIC_URL}}js/d3.min.js"></script>
 <script>
 
+
 var treeData = [
   {
     "name": "Udo Pletat",
-    "parent": "null",
     "children": [
       {
         "name": "Toni Bollinger",
-        "parent": "Top Level"
+        "children": [
+          {
+            "name": "Toni Bollinger",
+          },
+          {
+            "name": "Sven Lorenz",
+          }
+        ]
       },
       {
         "name": "Sven Lorenz",
-        "parent": "Top Level"
       }
     ]
   }
