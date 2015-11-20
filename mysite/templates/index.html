@@ -26,28 +26,10 @@
 <script src="{{STATIC_URL}}js/d3.min.js"></script>
 <script>
 
-
-var treeData = [
-  {
-    "name": "Udo Pletat",
-    "children": [
-      {
-        "name": "Toni Bollinger",
-        "children": [
-          {
-            "name": "Toni Bollinger",
-          },
-          {
-            "name": "Sven Lorenz",
-          }
-        ]
-      },
-      {
-        "name": "Sven Lorenz",
-      }
-    ]
-  }
-];
+var treeData = [{{out}}];
+// var treeData = [
+// {"name": "Udo Pletat", "children": [{"name": "Toni Bollinger", "children": [{"name": "Sven Lorenz", "children": []}]}, {"name": "Sven Lorenz", "children": [{"name": "Toni Bollinger", "children": []}]}]}
+// ];
 
 // ************** Generate the tree diagram  *****************
 var margin = {top: 20, right: 120, bottom: 20, left: 120},
