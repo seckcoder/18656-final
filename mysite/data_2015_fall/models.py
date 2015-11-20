@@ -20,7 +20,7 @@ class Author(StructuredNode):
         # Python sucks
         return "<Author: " + str(self.name) + ">"
     def __repr__(self):
-        return "<Author: " + repl(self.name) + ">"
+        return "<Author: " + repr(self.name) + ">"
 
     def __hash__(self):
         """

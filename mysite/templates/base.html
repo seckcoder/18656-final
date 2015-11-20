@@ -68,41 +68,29 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <p class="intro-text">DBLP search tool</p>
-
-                        <div class="input-group" id="adv-search">
-                            <input type="text" class="form-control" placeholder="Search Query" />
-                            <div class="input-group-btn">
-                                <div class="btn-group" role="group">
-                                    <div class="dropdown dropdown-lg">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                            <form active="/asd/aaa.html" class="form-horizontal" role="form" method="post">
-                                                
-                                                {% csrf_token %}
-                                                <div class="form-group">
-                                                <label for="filter">Filter by</label>
-                                                <select class="form-control">
-                                                    <option value="0" selected>All co-authors</option>
-                                                    <option value="1">Co-authors and their co-authors</option>
-                                                </select>
-                                                </div>
-                                                <div class="form-group">
-                                                <label for="contain">Author</label>
-                                                    <input class="form-control" type="text" />
-                                                </div>
-                                                <div class="form-group">
-                                                <label for="contain">Contains the words</label>
-                                                    <input class="form-control" type="text" />
-                                                </div>
-                                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                </div>
+                        <p class="intro-text">DBLP search tool  {{a}} {{h}}</p>
+                        <p class="intro-text"> {{out}} </p>
+                        
+                        <form action="" method="get" role="form" class="form-horizontal">
+                            <div class="input-group">
+                            <div class="input-group-btn search-panel">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span id="search_concept">level</span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                  <li><a href="#1">1</a></li>
+                                  <li><a href="#2">2</a></li>
+                                  <li><a href="#3">3</a></li>
+                                </ul>
                             </div>
-                        </div>
+                            <input type="hidden" name="search_param" value="1" id="search_param">         
+                            <input type="text" class="form-control" name="input" placeholder="Search term...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                            </div>
+                        </form>
+                        
                     </div>
                 </div>
             </div>

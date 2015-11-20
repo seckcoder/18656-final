@@ -1,6 +1,6 @@
 
 import os
-os.environ['NEO4J_REST_URL'] = 'http://neo4j:admin@localhost:7474/db/data/'
+os.environ['NEO4J_REST_URL'] = 'http://neo4j:123456@localhost:7474/db/data/'
 
 from data_2015_fall.models import *
 

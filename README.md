@@ -25,6 +25,29 @@ requirement:
 
   pip install -r requirements.txt
 
+# Load DBLP into Neo4j
+
+requirement:
+  maven
+
+- Clean and Compile
+
+  cd dblp-loader
+
+  mvn clean && mvn compile
+
+- Download dblp.xml file and extract to dblp-loader/ at http://dblp.uni-trier.de/xml/
+
+- Run DBLP parser
+  
+  mvn exec:java -Dexec.mainClass="edu.cmu.sv.neo4j.Parser"
+
+- Neo4j configuration
+
+  Set database location to dblp-loader/target/neo4j-dblp/
+
+  Start neo4j and set password to "123456" at http://127.0.0.1:7474/
+
 # Run Django Web App
 
 - Activate env
