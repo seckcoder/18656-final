@@ -13,6 +13,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class Parser {
     private Map<String, Long> allAuthors = new HashMap<String, Long>();
     private Map<String, Long> allPublications = new HashMap<String, Long>();
+    private Set<String> allRelationships = new HashSet<>();
     private Paper paper;
     private String content = null;
     private boolean isNewRecord = false;
@@ -29,9 +30,9 @@ public class Parser {
     class SAXHandler extends DefaultHandler {
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes) {
-			if (numRecords <= 9999) {
+			if (numRecords < 10000) {
 				switch (qName) {
-				case "paper":
+				case "article":
 				case "inproceedings":
 					paper = new Paper();
 					isNewRecord = true;
@@ -53,6 +54,12 @@ public class Parser {
 				case "booktitle":
 					paper.booktitle = content;
 					break;
+				case "journal":
+					paper.journal = content;
+					break;
+				case "volume":
+					paper.volume = content;
+					break;
 				case "year":
 					paper.year = Integer.parseInt(content);
 					break;
@@ -64,7 +71,7 @@ public class Parser {
 					if (allPublications.containsKey(paper.title)) {
 						titleNodeId = allPublications.get(paper.title);
 					} else {
-						titleNodeId = GraphDb.createPublication(paper.title);
+						titleNodeId = GraphDb.createPublication(paper);
 						allPublications.put(paper.title, titleNodeId);
 					}
 
@@ -76,9 +83,15 @@ public class Parser {
 							authorNodeId = GraphDb.createAuthor(author);
 							allAuthors.put(author, authorNodeId);
 						}
-						GraphDb.createRelationship(titleNodeId, authorNodeId);
+						if (!allRelationships.contains(titleNodeId+"->"+authorNodeId)) {
+							allRelationships.add(titleNodeId+"->"+authorNodeId);
+							GraphDb.createRelationship(titleNodeId, authorNodeId, "AUTHORED");
+						}
+						if (!allRelationships.contains(authorNodeId+"->"+titleNodeId)) {
+							allRelationships.add(authorNodeId+"->"+titleNodeId);
+							GraphDb.createRelationship(authorNodeId, titleNodeId, "AUTHORED");
+						}
 					}
-					System.out.println(numRecords + ": " + paper);
 				}
 			}
 		}
@@ -90,12 +103,18 @@ public class Parser {
 			}
 		}
     }
-    public static void main(String args[]) throws Exception{
-        System.out.println("Reading XML file.");
+    public static void main(String args[]) {
+        System.out.println("Loading XML file...");
         System.setProperty("entityExpansionLimit", "1000000");
         GraphDb.open();
         Parser parser = new Parser();
-        parser.parse();
-        GraphDb.close();
+        try {
+        	parser.parse();
+            System.out.println("Complete Loading " + parser.numRecords + " records into Neo4j.");
+        } catch (Exception e) {
+        	e.printStackTrace();
+        } finally {
+        	GraphDb.close();
+        }
     }
 }
