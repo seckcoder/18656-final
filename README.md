@@ -36,7 +36,7 @@ requirement:
 
   mvn clean && mvn compile
 
-- Download dblp.xml file and extract to dblp-loader/ at http://dblp.uni-trier.de/xml/
+- Download dblp.xml file at http://dblp.uni-trier.de/xml/ and extract to dblp-loader/
 
 - Run DBLP parser
   
