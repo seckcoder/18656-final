@@ -40,7 +40,7 @@ requirement:
 
 - Run DBLP parser
   
-  mvn exec:java -Dexec.mainClass="edu.cmu.sv.neo4j.Parser"
+  mvn exec:java -Dexec.mainClass="edu.cmu.sv.neo4j.Parser" -Dexec.cleanupDaemonThreads=false
 
 - Neo4j configuration
 
