@@ -63,3 +63,10 @@ env
 
 # OS generated files
 .DS_Store
+
+# IDE genetated files
+.settings
+.project
+.classpath
+
+dblp.xml

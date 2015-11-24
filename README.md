@@ -36,11 +36,11 @@ requirement:
 
   mvn clean && mvn compile
 
-- Download dblp.xml file and extract to dblp-loader/ at http://dblp.uni-trier.de/xml/
+- Download dblp.xml file at http://dblp.uni-trier.de/xml/ and extract to dblp-loader/
 
 - Run DBLP parser
   
-  mvn exec:java -Dexec.mainClass="edu.cmu.sv.neo4j.Parser"
+  mvn exec:java -Dexec.mainClass="edu.cmu.sv.neo4j.Parser" -Dexec.cleanupDaemonThreads=false
 
 - Neo4j configuration
 
